@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 22:06:45 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/21 01:27:49 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/23 23:07:42 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static	char	*ft_word(const char *str, char c, int *i)
 		k++;
 		*i += 1;
 	}
-	s[k] = '\0';
 	while (str[*i] == c && str[*i])
 		*i += 1;
+	s[k] = '\0';
 	return (s);
 }
 

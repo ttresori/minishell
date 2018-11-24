@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:31 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/21 03:33:59 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/24 01:43:16 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ typedef struct	s_file
 	int			size_env;
 	char		*comm;
 	int			size_comm;
-	char		*opt;
+	char		**opt;
 	int			size_opt;
-	char		*arg;
+	char		**arg;
 	int			size_arg;
 	char		**path;
 	int			size_path;
