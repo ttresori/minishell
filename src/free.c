@@ -6,11 +6,24 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 01:15:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 01:45:28 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 03:43:34 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_minishell.h"
+
+void	free_env(t_file *s_file)
+{
+	int i;
+
+	i = 0;
+	while (i < s_file->size_env)
+	{
+		ft_strdel(&s_file->env[i]);
+		i++;
+	}
+	free(s_file->env);
+}
 
 void    free_line(t_file *s_file)
 {
@@ -18,7 +31,10 @@ void    free_line(t_file *s_file)
 
 	i = 0;
 	while (s_file->comm[i] != NULL)
-		ft_strdel(&s_file->comm[i++]);
+	{
+		ft_strdel(&s_file->comm[i]);
+		i++;
+	}
 	free(s_file->comm);
 }
 

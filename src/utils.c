@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 01:31:54 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 03:02:01 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ void	print_prompt()
 	ft_putstr(getcwd(buf, 255));
 	ft_putstr("?> ");
 	ft_putstr(NORMAL);
-}
-
-void	put_env(char **env, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-		ft_putendl(env[i++]);
 }
 
 void	exec_comm(t_file *s_file, char *bin)
@@ -45,6 +36,38 @@ void	exec_comm(t_file *s_file, char *bin)
 	}
 }
 
+int		check_own_builtin(t_file *s_file)
+{
+	if (ft_strncmp(s_file->comm[0], "echo", 4) == 0)
+	{
+		do_echo(s_file);
+		return (1);
+	}
+	if (ft_strncmp(s_file->comm[0], "env", 3) == 0)
+	{
+		put_env(s_file->env, s_file->size_env);
+		return (1);
+	}
+/*	if (ft_strncmp(s_file->comm[0], "cd", 2) == 0)
+	{
+		do_cd(s_file);
+		return (1);
+		}*/
+	if (ft_strncmp(s_file->comm[0], "setenv", 6) == 0)
+	{
+		do_set_env(s_file);
+		return (1);
+	}
+	if (ft_strncmp(s_file->comm[0], "pwd", 3) == 0)
+	{
+		ft_putendl(s_file->pwd);
+		return (1);
+	}
+	if (ft_strncmp(s_file->comm[0], "exit", 4) == 0)
+		free_struct(s_file);
+	return (0);
+}
+
 int		check_builtin(t_file *s_file)
 {
 	int i;
@@ -53,11 +76,8 @@ int		check_builtin(t_file *s_file)
 	
 	i = 0;
 	tmp = NULL;
-	if (ft_strncmp(s_file->comm[0], "exit", 4) == 0)
-	{
-		ft_putendl("OKOK");
-		free_struct(s_file);
-	}
+	if (check_own_builtin(s_file) == 1)
+		return (0);
 	while (s_file->path[i] != NULL)
 	{
 		if (!(tmp2 = ft_strjoin(s_file->path[i], "/")))

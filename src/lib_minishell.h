@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:31 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 01:26:25 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 03:38:57 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct	s_file
 {
 	char		**env;
+	char		*pwd;
 	int			size_env;
 	char		**comm;
 	int			size_comm;
@@ -34,6 +35,9 @@ void			cpy_env(t_file *s_file, char **env);
 void			free_split(char **split);
 void			put_env(char **env, int size);
 void			put_path(t_file *s_file);
+void			do_echo(t_file *s_file);
+void			free_env(t_file *s_file);
+void			do_set_env(t_file *s_file);
 int				check_builtin(t_file *s_file);
 
 #endif
