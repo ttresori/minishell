@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 05:58:16 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 06:31:43 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	exec_comm(t_file *s_file, char *bin)
 
 int		check_own_builtin(t_file *s_file)
 {
+//	if (ft_strncmp())
 	if (ft_strncmp(s_file->comm[0], "cd", 2) == 0)
 	{
 		do_cd(s_file);

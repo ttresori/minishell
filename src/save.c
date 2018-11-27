@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 04:41:24 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 06:44:50 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,42 @@ void	cpy_env(t_file *s_file, char **env)
 	get_path(s_file);
 }
 
+void	check_if_dollar(t_file *s_file)
+{
+	static 	int		i = 0;
+	int		pos;
+	char	**tmp;
+	char	**tmp2;
+	
+	i = 0;
+	pos = -1;
+	while (s_file->comm[i] != NULL)
+	{
+		if (s_file->comm[i][0] == '$' && s_file->comm[i][1] != '$')
+		{
+			tmp = ft_strsplit(s_file->comm[i], '$');
+			pos = search_env(s_file->env, s_file->size_env, tmp[0]);
+			if (pos == -1)
+			{
+				free_split(tmp);
+				i++;
+				check_if_dollar(s_file);
+			}
+			tmp2 = ft_strsplit(s_file->env[pos], '=');
+			free(s_file->comm[i]);
+			s_file->comm[i] = ft_strdup(tmp2[1]);
+			free_split(tmp);
+			free_split(tmp2);
+		}
+		i++;
+	}
+	i = 0;
+	return ;
+}
+
 t_file	*split_line(t_file *s_file, char *line)
 {
 	s_file->comm = ft_strsplit(line, ' ');
+	check_if_dollar(s_file);
 	return (s_file);
 }
