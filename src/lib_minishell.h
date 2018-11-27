@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:31 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 05:19:58 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 06:00:54 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct	s_file
 {
 	char		**env;
 	char		*pwd;
+	char		*old_pwd;
 	int			size_env;
 	char		**comm;
 	int			size_comm;
@@ -27,7 +28,7 @@ typedef struct	s_file
 }				t_file;
 
 t_file			*split_line(t_file *s_file, char *line);
-void			print_prompt();
+void			print_prompt(t_file *s_file);
 void			check_command(t_file *s_file);
 void			free_line(t_file *s_file);
 void			free_struct(t_file *s_file);
@@ -39,6 +40,8 @@ void			do_echo(t_file *s_file);
 void			free_env(t_file *s_file);
 void			do_set_env(t_file *s_file);
 void			unset_env(t_file *s_file);
+void			do_cd(t_file *s_file);
 int				check_builtin(t_file *s_file);
+int				search_env(char **env, int size, char *element);
 
 #endif

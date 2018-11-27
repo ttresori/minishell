@@ -6,18 +6,16 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 05:18:03 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 05:58:16 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_minishell.h"
 
-void	print_prompt(void)
+void	print_prompt(t_file *s_file)
 {
-	char buf[255];
-
 	ft_putstr(GREEN);
-	ft_putstr(getcwd(buf, 255));
+	ft_putstr(s_file->pwd);
 	ft_putstr("?> ");
 	ft_putstr(NORMAL);
 }
@@ -38,6 +36,11 @@ void	exec_comm(t_file *s_file, char *bin)
 
 int		check_own_builtin(t_file *s_file)
 {
+	if (ft_strncmp(s_file->comm[0], "cd", 2) == 0)
+	{
+		do_cd(s_file);
+		return (1);
+	}
 	if (ft_strncmp(s_file->comm[0], "echo", 4) == 0)
 	{
 		do_echo(s_file);
@@ -56,11 +59,6 @@ int		check_own_builtin(t_file *s_file)
 	if (ft_strncmp(s_file->comm[0], "setenv", 6) == 0)
 	{
 		do_set_env(s_file);
-		return (1);
-	}
-	if (ft_strncmp(s_file->comm[0], "pwd", 3) == 0)
-	{
-		ft_putendl(s_file->pwd);
 		return (1);
 	}
 	if (ft_strncmp(s_file->comm[0], "exit", 4) == 0)
