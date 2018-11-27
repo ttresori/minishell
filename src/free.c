@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 01:15:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 04:29:53 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 04:39:44 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_env(t_file *s_file)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (i < s_file->size_env)
@@ -27,7 +27,7 @@ void	free_env(t_file *s_file)
 
 char	**free_split(char **split)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (split[i] != NULL)
@@ -37,9 +37,9 @@ char	**free_split(char **split)
 	return (split);
 }
 
-void    free_line(t_file *s_file)
+void	free_line(t_file *s_file)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (s_file->comm[i] != NULL)
@@ -50,11 +50,11 @@ void    free_line(t_file *s_file)
 	free(s_file->comm);
 }
 
-void    free_struct(t_file *s_file)
+void	free_struct(t_file *s_file)
 {
-    int	i;
+	int	i;
 
-    i =	0;
+	i = 0;
 	while (i < s_file->size_env)
 	{
 		ft_strdel(&s_file->env[i]);
@@ -70,10 +70,7 @@ void    free_struct(t_file *s_file)
 	free(s_file->path);
 	i = 0;
 	while (s_file->comm[i] != NULL)
-	{
-		ft_strdel(&s_file->comm[i]);
-		i++;
-	}
+		ft_strdel(&s_file->comm[i++]);
 	free(s_file->pwd);
 	free(s_file->comm);
 	free(s_file);

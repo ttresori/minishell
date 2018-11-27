@@ -6,34 +6,38 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 03:55:04 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 04:30:07 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 04:38:26 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_minishell.h"
 
-char	**modify_value(char **tab, int pos, char *value)
+void	add_new(t_file *s_file)
 {
-	char **new;
+	char	*tmp;
+	char	**new_env;
 
-	new = NULL;
-	ft_putstr("Find");
-	return (new);
+	tmp = NULL;
+	new_env = NULL;
+	if (!(tmp = ft_strdup(s_file->comm[1])))
+		return ;
+	new_env = add_in_tab(s_file->env, s_file->size_env, tmp);
+	free_env(s_file);
+	s_file->env = new_env;
+	s_file->size_env++;
+	free(tmp);
 }
 
-void    do_set_env(t_file *s_file)
+void	do_set_env(t_file *s_file)
 {
-    int i;
-    int find;
-    char *tmp;
-    char **new_env;
-	char **search;
-	
-    i = 0;
-    find = 0;
-    tmp = NULL;
-    while (i < s_file->size_env)
-    {
+	int		i;
+	int		find;
+	char	**search;
+
+	i = 0;
+	find = 0;
+	while (i < s_file->size_env)
+	{
 		search = ft_strsplit(s_file->comm[1], '=');
 		if (ft_strncmp(search[0], s_file->env[i], ft_strlen(search[0])) == 0)
 		{
@@ -44,29 +48,20 @@ void    do_set_env(t_file *s_file)
 		search = free_split(search);
 		i++;
 	}
-    if (find > 0)
-    {
+	if (find > 0)
+	{
 		free(s_file->env[find]);
 		s_file->env[find] = ft_strdup(s_file->comm[1]);
 		return ;
-    }
-    else
-    {
-    	if (!(tmp = ft_strdup(s_file->comm[1])))
-            return ;
-        new_env = add_in_tab(s_file->env, s_file->size_env, tmp);
-    	free_env(s_file);
-        s_file->env = new_env;
-    	s_file->size_env++;
-        free(tmp);
-    }
+	}
+	add_new(s_file);
 }
 
-void    put_env(char **env, int size)
+void	put_env(char **env, int size)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i < size)
-        ft_putendl(env[i++]);
+	i = 0;
+	while (i < size)
+		ft_putendl(env[i++]);
 }

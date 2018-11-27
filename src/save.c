@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 01:44:09 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 04:41:24 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_path(t_file *s_file)
 {
 	int		i;
 	char	**tmp;
-	
+
 	i = 0;
 	while (ft_strncmp(s_file->env[i], "PATH=", 5) != 0)
 		i++;
@@ -36,27 +36,27 @@ void	get_path(t_file *s_file)
 	free(tmp);
 }
 
-void    cpy_env(t_file *s_file, char **env)
+void	cpy_env(t_file *s_file, char **env)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (env[i] != NULL)
-        i++;
-    s_file->size_env = i;
-    if (!(s_file->env = (char**)malloc(sizeof(char*) * i)))
-        return ;
-    i = 0;
-    while (i < s_file->size_env)
-    {
-     	if (!(s_file->env[i] = ft_strdup(env[i])))
-            return ;
+	i = 0;
+	while (env[i] != NULL)
 		i++;
-    }
+	s_file->size_env = i;
+	if (!(s_file->env = (char**)malloc(sizeof(char*) * i)))
+		return ;
+	i = 0;
+	while (i < s_file->size_env)
+	{
+		if (!(s_file->env[i] = ft_strdup(env[i])))
+			return ;
+		i++;
+	}
 	get_path(s_file);
 }
 
-t_file		*split_line(t_file *s_file, char *line)
+t_file	*split_line(t_file *s_file, char *line)
 {
 	s_file->comm = ft_strsplit(line, ' ');
 	return (s_file);

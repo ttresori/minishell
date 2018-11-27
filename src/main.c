@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:08 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 03:23:48 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 04:40:36 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	core(char **env)
 	char	*line;
 	char	buf[255];
 	t_file	*s_file;
-	
+
 	if (!(s_file = (t_file*)malloc(sizeof(t_file))))
 		return ;
 	if (!(s_file->pwd = ft_strdup(getcwd(buf, 255))))
 		return ;
-    s_file->size_comm = 0;
+	s_file->size_comm = 0;
 	s_file->comm = NULL;
 	cpy_env(s_file, env);
 	while (42)

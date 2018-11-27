@@ -6,13 +6,13 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 03:02:01 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 04:43:13 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_minishell.h"
 
-void	print_prompt()
+void	print_prompt(void)
 {
 	char buf[255];
 
@@ -48,11 +48,6 @@ int		check_own_builtin(t_file *s_file)
 		put_env(s_file->env, s_file->size_env);
 		return (1);
 	}
-/*	if (ft_strncmp(s_file->comm[0], "cd", 2) == 0)
-	{
-		do_cd(s_file);
-		return (1);
-		}*/
 	if (ft_strncmp(s_file->comm[0], "setenv", 6) == 0)
 	{
 		do_set_env(s_file);
@@ -70,15 +65,15 @@ int		check_own_builtin(t_file *s_file)
 
 int		check_builtin(t_file *s_file)
 {
-	int i;
-	char *tmp;
-	char *tmp2;
-	
+	int		i;
+	char	*tmp;
+	char	*tmp2;
+
 	i = 0;
 	tmp = NULL;
 	if (check_own_builtin(s_file) == 1)
 		return (0);
-	while (s_file->path[i] != NULL)
+	while (s_file->path[i++] != NULL)
 	{
 		if (!(tmp2 = ft_strjoin(s_file->path[i], "/")))
 			return (-1);
@@ -91,7 +86,6 @@ int		check_builtin(t_file *s_file)
 			free(tmp2);
 			return (1);
 		}
-		i++;
 		free(tmp);
 		free(tmp2);
 	}
