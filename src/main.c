@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:08 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/24 03:43:37 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 01:29:33 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ void	core(char **env)
 	if (!(s_file = (t_file*)malloc(sizeof(t_file))))
 		return ;
     s_file->size_comm = 0;
-    s_file->size_opt = 0;
-    s_file->size_arg = 0;
-	s_file->opt = NULL;
-	s_file->arg = NULL;
 	s_file->comm = NULL;
 	cpy_env(s_file, env);
 	while (42)
@@ -35,7 +31,7 @@ void	core(char **env)
 			return ;
 		ft_strdel(&line);
 		get_next_line(-2, NULL);
-		//check_command(s_file);
+		check_builtin(s_file);
 		free_line(s_file);
 	}
 }

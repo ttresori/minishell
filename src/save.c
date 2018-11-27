@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/24 03:43:35 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 01:44:09 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,19 @@ void	put_path(t_file *s_file)
 void	get_path(t_file *s_file)
 {
 	int		i;
-		
+	char	**tmp;
+	
 	i = 0;
 	while (ft_strncmp(s_file->env[i], "PATH=", 5) != 0)
 		i++;
 	s_file->path = ft_strsplit(s_file->env[i], ':');
+	tmp = ft_strsplit(s_file->path[0], '=');
+	free(s_file->path[0]);
+	s_file->path[0] = ft_strdup(tmp[1]);
+	i = 0;
+	while (tmp[i] != NULL)
+		ft_strdel(&tmp[i++]);
+	free(tmp);
 }
 
 void    cpy_env(t_file *s_file, char **env)
@@ -50,42 +58,6 @@ void    cpy_env(t_file *s_file, char **env)
 
 t_file		*split_line(t_file *s_file, char *line)
 {
-	int 	i;
-	int		pos;
-	int		save;
-	char	**split;
-	
-	i = 0;
-	pos = 0;
-	save = 0;
-	if (!(split = ft_strsplit(line, ' ')))
-		return (s_file);
-	if (!(s_file->comm = ft_strdup(split[0])))
-		return (s_file);
-	s_file->size_comm = 1;
-	pos = 1;
-	i = pos;
-	save = i;
-	pos = 0;
-	while (split[i] != NULL)
-		if (split[i++][0] == '-')
-			pos++;
-	i = 0;
-	if (pos > 0)
-	{
-		if (!(s_file->opt = (char**)malloc(sizeof(char*) * pos + 1)))
-			return (s_file);
-		s_file->opt[pos + 1] = NULL;
-		s_file->size_opt = pos;
-		while (split[save] != NULL)
-		{
-			if (split[save][0] == '-')
-				s_file->opt[i++] = ft_strdup(split[save]);
-			save++;
-		}
-//		s_file->arg = ft_strsplit(split[save - 1], ' ');
-	}
-	s_file->arg = ft_strsplit(s_file->comm, ' ');
-	free_split(split);
+	s_file->comm = ft_strsplit(line, ' ');
 	return (s_file);
 }
