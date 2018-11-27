@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 04:43:13 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 05:18:03 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ int		check_own_builtin(t_file *s_file)
 	if (ft_strncmp(s_file->comm[0], "env", 3) == 0)
 	{
 		put_env(s_file->env, s_file->size_env);
+		return (1);
+	}
+	if (ft_strncmp(s_file->comm[0], "unsetenv", 8) == 0)
+	{
+		unset_env(s_file);
 		return (1);
 	}
 	if (ft_strncmp(s_file->comm[0], "setenv", 6) == 0)

@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:31 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 04:30:17 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 05:19:58 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void			put_path(t_file *s_file);
 void			do_echo(t_file *s_file);
 void			free_env(t_file *s_file);
 void			do_set_env(t_file *s_file);
+void			unset_env(t_file *s_file);
 int				check_builtin(t_file *s_file);
 
 #endif

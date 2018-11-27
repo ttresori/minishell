@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 03:55:04 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 04:38:26 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 05:32:22 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,39 @@ void	add_new(t_file *s_file)
 	free(tmp);
 }
 
+int		search_env(char **env, int size, char *element)
+{
+	int pos;
+
+	pos = 0;
+	while (pos < size)
+	{
+		if (ft_strncmp(element, env[pos], ft_strlen(element)) == 0)
+			return (pos);
+		pos++;
+	}
+	return (-1);
+}
+
+void	unset_env(t_file *s_file)
+{
+	int		pos;
+	char	**search;
+	char	**new_env;
+	
+	pos = 0;
+	new_env = NULL;
+	if (s_file->comm[1] == NULL)
+		return ;
+	search = ft_strsplit(s_file->comm[1], '=');
+	pos = search_env(s_file->env, s_file->size_env, search[0]);
+	new_env = remove_in_tab(s_file->env, s_file->size_env, pos);
+	free_env(s_file);
+	search = free_split(search);
+	s_file->env = new_env;
+	s_file->size_env--;
+}
+
 void	do_set_env(t_file *s_file)
 {
 	int		i;
@@ -36,25 +69,17 @@ void	do_set_env(t_file *s_file)
 
 	i = 0;
 	find = 0;
-	while (i < s_file->size_env)
-	{
-		search = ft_strsplit(s_file->comm[1], '=');
-		if (ft_strncmp(search[0], s_file->env[i], ft_strlen(search[0])) == 0)
-		{
-			find = i;
-			search = free_split(search);
-			break ;
-		}
-		search = free_split(search);
-		i++;
-	}
-	if (find > 0)
+	if (s_file->comm[1] == NULL)
+		return ;
+	search = ft_strsplit(s_file->comm[1], '=');
+	if ((find = search_env(s_file->env, s_file->size_env, search[0])) > -1)
 	{
 		free(s_file->env[find]);
 		s_file->env[find] = ft_strdup(s_file->comm[1]);
-		return ;
 	}
-	add_new(s_file);
+	else
+		add_new(s_file);
+	search = free_split(search);
 }
 
 void	put_env(char **env, int size)

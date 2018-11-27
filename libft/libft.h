@@ -6,7 +6,7 @@
 /*   By: ttresori <ttresori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 20:33:56 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 03:58:34 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 05:33:34 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void				*ft_memmove(void *dest, const void *src, size_t n);
 void				*ft_memset(void *s, int c, size_t n);
 void				*ft_memalloc(size_t size);
 char				**ft_char_2d(int it, int jt);
+char				**remove_in_tab(char **tab, int size, int pos);
 void				ft_free_char_2d(char **tab);
 void				ft_free_char_3d(char ***tab);
 void				ft_free_int_2d(int **tab, int il);
@@ -125,4 +126,5 @@ t_list				*ft_lstnew(const void *content, size_t content_size);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 int					get_next_line(int fd, char **line);
+
 #endif
