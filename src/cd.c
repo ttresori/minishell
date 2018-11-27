@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 05:42:58 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 06:54:59 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 07:01:42 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,15 @@ void	do_cd(t_file *s_file)
 	}
 	else
 		path = ft_strdup(s_file->comm[1]);
-	if (path[0] == '-')
+	if (path[0] == '-' && path[1] == '-')
+	{
+		free(path);
+		pos = search_env(s_file->env, s_file->size_env, "HOME");
+		tmp = ft_strsplit(s_file->env[pos], '=');
+		path = ft_strdup(tmp[1]);
+		free_split(tmp);
+	}
+	else if (path[0] == '-' && path[1] == '\0')
 	{
 		free(path);
 		path = ft_strdup(s_file->old_pwd);
