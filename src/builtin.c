@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 01:51:19 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 03:59:39 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 07:51:23 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,36 @@ void	do_echo(t_file *s_file)
 		ft_putchar(' ');
 	}
 	ft_putchar('\n');
+}
+
+int     check_own_builtin(t_file *s_file)
+{
+    if (ft_strncmp(s_file->comm[0], "cd", 2) == 0)
+    {
+     	do_cd(s_file);
+		return (1);
+    }
+    if (ft_strncmp(s_file->comm[0], "echo", 4) == 0)
+    {
+     	do_echo(s_file);
+		return (1);
+    }
+    if (ft_strncmp(s_file->comm[0], "env", 3) == 0)
+    {
+     	put_env(s_file->env, s_file->size_env);
+		return (1);
+    }
+    if (ft_strncmp(s_file->comm[0], "unsetenv", 8) == 0)
+    {
+     	unset_env(s_file);
+		return (1);
+    }
+    if (ft_strncmp(s_file->comm[0], "setenv", 6) == 0)
+    {
+     	do_set_env(s_file);
+		return (1);
+    }
+    if (ft_strncmp(s_file->comm[0], "exit", 4) == 0)
+		free_struct(s_file);
+    return (0);
 }

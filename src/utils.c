@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 06:31:43 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 07:53:26 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,12 @@ void	exec_comm(t_file *s_file, char *bin)
 		wait(0);
 	if (father == 0)
 	{
-		execve(bin, s_file->comm, s_file->env);
+		if (bin != NULL)
+			execve(bin, s_file->comm, s_file->env);
+		else
+			execve(s_file->comm[0], s_file->comm, s_file->env);
 		ft_putstr_fd("minishell: command not found: ", 2);
 	}
-}
-
-int		check_own_builtin(t_file *s_file)
-{
-//	if (ft_strncmp())
-	if (ft_strncmp(s_file->comm[0], "cd", 2) == 0)
-	{
-		do_cd(s_file);
-		return (1);
-	}
-	if (ft_strncmp(s_file->comm[0], "echo", 4) == 0)
-	{
-		do_echo(s_file);
-		return (1);
-	}
-	if (ft_strncmp(s_file->comm[0], "env", 3) == 0)
-	{
-		put_env(s_file->env, s_file->size_env);
-		return (1);
-	}
-	if (ft_strncmp(s_file->comm[0], "unsetenv", 8) == 0)
-	{
-		unset_env(s_file);
-		return (1);
-	}
-	if (ft_strncmp(s_file->comm[0], "setenv", 6) == 0)
-	{
-		do_set_env(s_file);
-		return (1);
-	}
-	if (ft_strncmp(s_file->comm[0], "exit", 4) == 0)
-		free_struct(s_file);
-	return (0);
 }
 
 int		check_builtin(t_file *s_file)
@@ -75,14 +45,20 @@ int		check_builtin(t_file *s_file)
 
 	i = 0;
 	tmp = NULL;
+	if (access(s_file->comm[0], F_OK) == 0)
+	{
+		exec_comm(s_file, NULL);
+		return (1);
+	}
 	if (check_own_builtin(s_file) == 1)
 		return (0);
-	while (s_file->path[i++] != NULL)
+	while (s_file->path[i] != NULL)
 	{
 		if (!(tmp2 = ft_strjoin(s_file->path[i], "/")))
 			return (-1);
 		if (!(tmp = ft_strjoin(tmp2, s_file->comm[0])))
 			return (-1);
+		ft_putendl(tmp);
 		if (access(tmp, F_OK) == 0)
 		{
 			exec_comm(s_file, tmp);
@@ -92,6 +68,7 @@ int		check_builtin(t_file *s_file)
 		}
 		free(tmp);
 		free(tmp2);
+		i++;
 	}
 	return (0);
 }

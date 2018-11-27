@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 06:44:50 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 07:42:03 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	check_if_dollar(t_file *s_file)
 	{
 		if (s_file->comm[i][0] == '$' && s_file->comm[i][1] != '$')
 		{
-			tmp = ft_strsplit(s_file->comm[i], '$');
+			if (!(tmp = ft_strsplit(s_file->comm[i], '$')))
+				return ;
 			pos = search_env(s_file->env, s_file->size_env, tmp[0]);
 			if (pos == -1)
 			{
@@ -77,9 +78,11 @@ void	check_if_dollar(t_file *s_file)
 				i++;
 				check_if_dollar(s_file);
 			}
-			tmp2 = ft_strsplit(s_file->env[pos], '=');
+			if (!(tmp2 = ft_strsplit(s_file->env[pos], '=')))
+				return ;
 			free(s_file->comm[i]);
-			s_file->comm[i] = ft_strdup(tmp2[1]);
+			if (!(s_file->comm[i] = ft_strdup(tmp2[1])))
+				return ;;
 			free_split(tmp);
 			free_split(tmp2);
 		}
