@@ -6,7 +6,7 @@
 /*   By: ttresori <ttresori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 20:33:56 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/21 01:34:54 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 03:58:34 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char				**ft_strsplit(const char *s, char c);
 char				*ft_strjoincl(char *s1, char *s2, int free_both);
 char				*ft_strjoinchcl(char *s1, char c);
 char				*ft_strjoinch(char const *s1, char c);
+char				**add_in_tab(char **tab, int size, char *element);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isprint(int c);
@@ -124,5 +125,4 @@ t_list				*ft_lstnew(const void *content, size_t content_size);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 int					get_next_line(int fd, char **line);
-
 #endif

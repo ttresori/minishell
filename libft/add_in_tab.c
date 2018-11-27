@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   add_in_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 01:51:19 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 03:59:39 by ttresori         ###   ########.fr       */
+/*   Created: 2018/11/27 03:55:45 by ttresori          #+#    #+#             */
+/*   Updated: 2018/11/27 03:58:07 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_minishell.h"
+#include "libft.h"
 
-void	do_echo(t_file *s_file)
+char	**add_in_tab(char **tab, int size, char *element)
 {
-	int i;
+	int		i;
+	char	**new;
 
-	i = 1;
-	while (s_file->comm[i] != NULL)
+	i = 0;
+	if (!(new = (char**)malloc(sizeof(char*) * (size + 1))))
+		return (NULL);
+	while (i < size)
 	{
-		ft_putstr(s_file->comm[i]);
+		if (!(new[i] = ft_strdup(tab[i])))
+			return (NULL);
 		i++;
-		ft_putchar(' ');
 	}
-	ft_putchar('\n');
+	if (!(new[size] = ft_strdup(element)))
+		return (NULL);
+	return (new);
 }

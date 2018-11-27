@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:31 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 03:38:57 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/27 04:30:17 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void			check_command(t_file *s_file);
 void			free_line(t_file *s_file);
 void			free_struct(t_file *s_file);
 void			cpy_env(t_file *s_file, char **env);
-void			free_split(char **split);
+char			**free_split(char **split);
 void			put_env(char **env, int size);
 void			put_path(t_file *s_file);
 void			do_echo(t_file *s_file);

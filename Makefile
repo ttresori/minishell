@@ -6,14 +6,14 @@
 #    By: ttresori <ttresori@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/22 21:43:02 by carmand           #+#    #+#              #
-#    Updated: 2018/11/27 01:52:54 by ttresori         ###   ########.fr        #
+#    Updated: 2018/11/27 04:00:03 by ttresori         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRCDIR = src
-SRC = main.c utils.c save.c free.c builtin.c
+SRC = main.c utils.c save.c free.c builtin.c env.c
 
 OBJDIR = obj
 OBJ = $(SRC:.c=.o)
