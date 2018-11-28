@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 03:55:04 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 05:39:07 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 15:16:51 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	add_new(t_file *s_file)
 {
 	char	*tmp;
 	char	**new_env;
-
+	
 	tmp = NULL;
 	new_env = NULL;
 	if (!(tmp = ft_strdup(s_file->comm[1])))
@@ -52,9 +52,9 @@ void	unset_env(t_file *s_file)
 	new_env = NULL;
 	if (s_file->comm[1] == NULL)
 		return ;
-	search = ft_strsplit(s_file->comm[1], '=');
-	pos = search_env(s_file->env, s_file->size_env, search[0]);
-	if (pos == -1)
+	if (!(search = ft_strsplit(s_file->comm[1], '=')))
+		return ;
+	if ((pos = search_env(s_file->env, s_file->size_env, search[0])) == -1)
 	{
 		search = free_split(search);
 		return ;
@@ -64,6 +64,19 @@ void	unset_env(t_file *s_file)
 	search = free_split(search);
 	s_file->env = new_env;
 	s_file->size_env--;
+}
+
+void	add_env(t_file *s_file, char *var, char *element)
+{
+	char	**new_env;
+	char	*tmp;
+	
+	tmp = ft_strjoin(var, element);
+	new_env = add_in_tab(s_file->env, s_file->size_env, tmp);
+	free_env(s_file);
+	free(tmp);
+	s_file->env = new_env;
+	s_file->size_env++;
 }
 
 void	do_set_env(t_file *s_file)
@@ -76,7 +89,8 @@ void	do_set_env(t_file *s_file)
 	find = 0;
 	if (s_file->comm[1] == NULL)
 		return ;
-	search = ft_strsplit(s_file->comm[1], '=');
+	if (!(search = ft_strsplit(s_file->comm[1], '=')))
+		return ;
 	if (search[1] == NULL)
 	{
 		search = free_split(search);

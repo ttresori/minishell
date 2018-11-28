@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:08 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 06:02:51 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 12:34:37 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	core(char **env)
 		get_next_line(0, &line);
 		if (!(s_file = split_line(s_file, line)))
 			return ;
-		ft_strdel(&line);
 		get_next_line(-2, NULL);
-		check_builtin(s_file);
+		if (s_file->comm[0] != NULL)
+			check_builtin(s_file);
+		ft_strdel(&line);
 		free_line(s_file);
 	}
 }

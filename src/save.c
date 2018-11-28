@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 07:42:03 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 13:59:51 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ void	get_path(t_file *s_file)
 	i = 0;
 	while (ft_strncmp(s_file->env[i], "PATH=", 5) != 0)
 		i++;
-	s_file->path = ft_strsplit(s_file->env[i], ':');
-	tmp = ft_strsplit(s_file->path[0], '=');
+	if (!(s_file->path = ft_strsplit(s_file->env[i], ':')))
+		return ;
+	if (!(tmp = ft_strsplit(s_file->path[0], '=')))
+		return ;
 	free(s_file->path[0]);
-	s_file->path[0] = ft_strdup(tmp[1]);
+	if (!(s_file->path[0] = ft_strdup(tmp[1])))
+		return ;
 	i = 0;
 	while (tmp[i] != NULL)
 		ft_strdel(&tmp[i++]);
@@ -59,13 +62,15 @@ void	cpy_env(t_file *s_file, char **env)
 void	check_if_dollar(t_file *s_file)
 {
 	static 	int		i = 0;
+	int		i2;
 	int		pos;
 	char	**tmp;
 	char	**tmp2;
-	
+
 	i = 0;
+	i2 = 0;
 	pos = -1;
-	while (s_file->comm[i] != NULL)
+	while (i < s_file->size_comm)
 	{
 		if (s_file->comm[i][0] == '$' && s_file->comm[i][1] != '$')
 		{
@@ -82,7 +87,7 @@ void	check_if_dollar(t_file *s_file)
 				return ;
 			free(s_file->comm[i]);
 			if (!(s_file->comm[i] = ft_strdup(tmp2[1])))
-				return ;;
+				return ;
 			free_split(tmp);
 			free_split(tmp2);
 		}
@@ -94,7 +99,13 @@ void	check_if_dollar(t_file *s_file)
 
 t_file	*split_line(t_file *s_file, char *line)
 {
+	s_file->size_comm = 0;
+	s_file->size_path = 0;
 	s_file->comm = ft_strsplit(line, ' ');
+	while (s_file->comm[s_file->size_comm] != NULL)
+		s_file->size_comm++;
+	while (s_file->path[s_file->size_path] != NULL)
+		++s_file->size_path;
 	check_if_dollar(s_file);
 	return (s_file);
 }

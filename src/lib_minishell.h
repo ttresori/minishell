@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:31 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 07:51:42 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 14:24:08 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void			free_env(t_file *s_file);
 void			do_set_env(t_file *s_file);
 void			unset_env(t_file *s_file);
 void			do_cd(t_file *s_file);
+void			print_error_no_var_env(char *error);
+void 	   add_env(t_file *s_file, char *var, char *element);
 int				check_builtin(t_file *s_file);
 int				search_env(char **env, int size, char *element);
 int				check_own_builtin(t_file *s_file);

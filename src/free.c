@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 01:15:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/27 04:39:44 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 13:52:24 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	free_line(t_file *s_file)
 	int		i;
 
 	i = 0;
-	while (s_file->comm[i] != NULL)
+	while (i < s_file->size_comm)
 	{
 		ft_strdel(&s_file->comm[i]);
 		i++;
