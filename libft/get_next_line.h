@@ -6,10 +6,9 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 02:30:42 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/21 02:30:55 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:55:31 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H

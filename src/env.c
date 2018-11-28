@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 03:55:04 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 17:44:35 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 18:14:19 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	add_new(t_file *s_file)
 {
 	char	*tmp;
 	char	**new_env;
-	
+
 	tmp = NULL;
 	new_env = NULL;
 	if (!(tmp = ft_strdup(s_file->comm[1])))
@@ -26,20 +26,6 @@ void	add_new(t_file *s_file)
 	s_file->env = new_env;
 	s_file->size_env++;
 	free(tmp);
-}
-
-int		search_env(char **env, int size, char *element)
-{
-	int pos;
-
-	pos = 0;
-	while (pos < size)
-	{
-		if (ft_strncmp(element, env[pos], ft_strlen(element)) == 0)
-			return (pos);
-		pos++;
-	}
-	return (-1);
 }
 
 void	unset_env(t_file *s_file)
@@ -70,7 +56,7 @@ void	add_env(t_file *s_file, char *var, char *element)
 {
 	char	**new_env;
 	char	*tmp;
-	
+
 	tmp = ft_strjoin(var, element);
 	new_env = add_in_tab(s_file->env, s_file->size_env, tmp);
 	free_env(s_file);
