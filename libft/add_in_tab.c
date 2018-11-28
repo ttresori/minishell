@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 03:55:45 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 15:11:12 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 16:14:58 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**add_in_tab(char **tab, int size, char *element)
 	char	**new;
 
 	i = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * (size + 1))))
+	if (!(new = (char**)malloc(sizeof(char*) * (size + 2))))
 		return (NULL);
 	if (tab[0] == NULL)
 	{
@@ -33,5 +33,6 @@ char	**add_in_tab(char **tab, int size, char *element)
 	}
 	if (!(new[size] = ft_strdup(element)))
 		return (NULL);
+	new[size + 1] = NULL;
 	return (new);
 }

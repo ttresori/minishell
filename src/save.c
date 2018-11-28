@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 13:59:51 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:49:07 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ void	get_path(t_file *s_file)
 	int		i;
 	char	**tmp;
 
-	i = 0;
-	while (ft_strncmp(s_file->env[i], "PATH=", 5) != 0)
-		i++;
+	i = search_env(s_file->env, s_file->size_env, "PATH=");
+	if (i < 0)
+	{
+		s_file->path = NULL;
+		return ;
+	}
 	if (!(s_file->path = ft_strsplit(s_file->env[i], ':')))
 		return ;
 	if (!(tmp = ft_strsplit(s_file->path[0], '=')))
@@ -36,6 +39,10 @@ void	get_path(t_file *s_file)
 	i = 0;
 	while (tmp[i] != NULL)
 		ft_strdel(&tmp[i++]);
+	i = 0;
+	while (s_file->path[i])
+		i++;
+	s_file->size_path = i + 1;
 	free(tmp);
 }
 
@@ -57,6 +64,19 @@ void	cpy_env(t_file *s_file, char **env)
 		i++;
 	}
 	get_path(s_file);
+}
+
+char	*get_home(t_file *s_file)
+{
+	char **tmp;
+	char *returnt;
+	
+	tmp = NULL;
+	tmp = ft_strsplit(s_file->env[search_env(s_file->env, \
+											 s_file->size_env, "HOME=")], '=');
+	returnt = ft_strdup(tmp[1]);
+	free_split(tmp);
+	return (returnt);
 }
 
 void	check_if_dollar(t_file *s_file)
@@ -91,6 +111,11 @@ void	check_if_dollar(t_file *s_file)
 			free_split(tmp);
 			free_split(tmp2);
 		}
+		if (s_file->comm[i][0] == '~' && s_file->comm[i][1] == '\0')
+		{
+			free(s_file->comm[i]);
+			s_file->comm[i] = get_home(s_file);
+		}
 		i++;
 	}
 	i = 0;
@@ -100,12 +125,12 @@ void	check_if_dollar(t_file *s_file)
 t_file	*split_line(t_file *s_file, char *line)
 {
 	s_file->size_comm = 0;
-	s_file->size_path = 0;
 	s_file->comm = ft_strsplit(line, ' ');
 	while (s_file->comm[s_file->size_comm] != NULL)
 		s_file->size_comm++;
-	while (s_file->path[s_file->size_path] != NULL)
-		++s_file->size_path;
 	check_if_dollar(s_file);
+	if (s_file->path != NULL)
+		free_split(s_file->path);
+	get_path(s_file);
 	return (s_file);
 }

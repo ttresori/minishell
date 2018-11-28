@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 01:15:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 13:52:24 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:53:01 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ void	free_struct(t_file *s_file)
 		ft_strdel(&s_file->env[i]);
 		i++;
 	}
-	free(s_file->env);
+	if (s_file->env != NULL)
+		free(s_file->env);
 	i = 0;
-	while (s_file->path[i] != NULL)
+	if (s_file->path != NULL)
 	{
-		ft_strdel(&s_file->path[i]);
-		i++;
+		free_split(s_file->path);
 	}
-	free(s_file->path);
 	i = 0;
 	while (s_file->comm[i] != NULL)
 		ft_strdel(&s_file->comm[i++]);
 	free(s_file->pwd);
+	free(s_file->old_pwd);
 	free(s_file->comm);
 	free(s_file);
 	exit(0);

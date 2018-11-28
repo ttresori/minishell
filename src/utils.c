@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 14:05:48 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:44:15 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	print_prompt(t_file *s_file)
 {
+	char	buf[256];
+	
 	ft_putstr(GREEN);
-	ft_putstr(s_file->pwd);
+	ft_putstr(getcwd(buf, 256));
 	ft_putstr("?> ");
 	ft_putstr(NORMAL);
 }
@@ -39,10 +41,8 @@ void	exec_comm(t_file *s_file, char *bin)
 		wait(0);
 	if (father == 0)
 	{
-		if (bin != NULL)
-			execve(bin, s_file->comm, s_file->env);
-		else
-			execve(s_file->comm[0], s_file->comm, s_file->env);
+		ft_putendl(bin);
+		execve(bin, s_file->comm, s_file->env);
 		ft_putstr_fd("minishell: command not found: ", 2);
 		ft_putendl_fd(s_file->comm[0], 2);
 		exit(0);
@@ -59,27 +59,30 @@ int		check_builtin(t_file *s_file)
 	tmp = NULL;
 	if (access(s_file->comm[0], F_OK) == 0)
 	{
-		exec_comm(s_file, NULL);
+		exec_comm(s_file, s_file->comm[0]);
 		return (1);
 	}
 	if (check_own_builtin(s_file) == 1)
 		return (0);
-	while (s_file->path[i] != NULL)
+	if (s_file->path != NULL)
 	{
-		if (!(tmp2 = ft_strjoin(s_file->path[i], "/")))
-			return (-1);
-		if (!(tmp = ft_strjoin(tmp2, s_file->comm[0])))
-			return (-1);
-		if (access(tmp, F_OK) == 0)
+		while (s_file->path[i] != NULL)
 		{
-			exec_comm(s_file, tmp);
+			if (!(tmp2 = ft_strjoin(s_file->path[i], "/")))
+				return (-1);
+			if (!(tmp = ft_strjoin(tmp2, s_file->comm[0])))
+				return (-1);
+			if (access(tmp, F_OK) == 0)
+			{
+				exec_comm(s_file, tmp);
+				free(tmp);
+				free(tmp2);
+				return (1);
+			}
 			free(tmp);
 			free(tmp2);
-			return (1);
+			i++;
 		}
-		free(tmp);
-		free(tmp2);
-		i++;
 	}
 	ft_putstr_fd("minishell: command not found: ", 2);
 	ft_putendl_fd(s_file->comm[0], 2);

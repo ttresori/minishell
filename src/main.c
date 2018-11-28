@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:08 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 12:34:37 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:43:50 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	core(char **env)
 {
 	char	*line;
-	char	buf[255];
+	char	buf[256];
 	t_file	*s_file;
 
 	if (!(s_file = (t_file*)malloc(sizeof(t_file))))
 		return ;
-	if (!(s_file->pwd = ft_strdup(getcwd(buf, 255))))
+	if (!(s_file->pwd = ft_strdup(getcwd(buf, 256))))
 		return ;
 	if (!(s_file->old_pwd = ft_strdup(s_file->pwd)))
 		return ;
