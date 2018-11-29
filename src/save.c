@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 18:15:49 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/29 14:18:44 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,40 @@ void	cpy_env(t_file *s_file, char **env)
 	get_path(s_file);
 }
 
+int		help_check_dollar(t_file *s_file, int i)
+{
+	int				pos;
+	char			**tmp;
+	char			**tmp2;
+
+	pos = -1;
+	if (!(tmp = ft_strsplit(s_file->comm[i], '$')))
+		return (-1);
+	pos = search_env(s_file->env, s_file->size_env, tmp[0]);
+	if (pos == -1)
+	{
+		free_split(tmp);
+		i++;
+		check_if_dollar(s_file);
+	}
+	if (!(tmp2 = ft_strsplit(s_file->env[pos], '=')))
+		return (-1);
+	free(s_file->comm[i]);
+	if (!(s_file->comm[i] = ft_strdup(tmp2[1])))
+		return (-1);
+	free_split(tmp);
+	free_split(tmp2);
+	return (i);
+}
+
 void	check_if_dollar(t_file *s_file)
 {
-	static 	int		i = 0;
-	int		i2;
-	int		pos;
-	char	**tmp;
-	char	**tmp2;
+	static	int	i = 0;
 
-	i = 0;
-	i2 = 0;
-	pos = -1;
 	while (i < s_file->size_comm)
 	{
 		if (s_file->comm[i][0] == '$' && s_file->comm[i][1] != '$')
-		{
-			if (!(tmp = ft_strsplit(s_file->comm[i], '$')))
-				return ;
-			pos = search_env(s_file->env, s_file->size_env, tmp[0]);
-			if (pos == -1)
-			{
-				free_split(tmp);
-				i++;
-				check_if_dollar(s_file);
-			}
-			if (!(tmp2 = ft_strsplit(s_file->env[pos], '=')))
-				return ;
-			free(s_file->comm[i]);
-			if (!(s_file->comm[i] = ft_strdup(tmp2[1])))
-				return ;
-			free_split(tmp);
-			free_split(tmp2);
-		}
+			i = help_check_dollar(s_file, i);
 		if (s_file->comm[i][0] == '~' && s_file->comm[i][1] == '\0')
 		{
 			free(s_file->comm[i]);
