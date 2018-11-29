@@ -6,7 +6,7 @@
 #    By: ttresori <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/30 22:10:23 by ttresori          #+#    #+#              #
-#    Updated: 2018/11/27 05:33:08 by ttresori         ###   ########.fr        #
+#    Updated: 2018/11/29 13:16:09 by ttresori         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC =	ft_putchar.c ft_putstr.c ft_putnbr.c ft_strlen.c \
 		ft_putnbrspace.c ft_islower.c ft_lstadd.c ft_lstdel.c ft_lstmap.c \
 		ft_lstnew.c ft_lstiter.c ft_lstdelone.c ft_putstrspace.c \
 		ft_putstrstart.c ft_print_space.c ft_putendl_b.c ft_char_2d.c \
-		ft_char_3d.c get_next_line.c add_in_tab.c remove_in_tab.c
+		ft_char_3d.c get_next_line.c add_in_tab.c remove_in_tab.c \
+		search_env.c
 
 OBJ = $(SRC:.c=.o)
 

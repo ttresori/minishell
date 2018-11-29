@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:08 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 17:43:50 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:23:40 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	core(char **env)
 	cpy_env(s_file, env);
 	while (42)
 	{
-		print_prompt(s_file);
+		print_prompt();
 		get_next_line(0, &line);
 		if (!(s_file = split_line(s_file, line)))
 			return ;

@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 22:56:31 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 18:20:14 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:19:06 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_file			*split_line(t_file *s_file, char *line);
 char			**free_split(char **split);
 char			*get_home(t_file *s_file);
 void			get_path(t_file *s_file);
-void			print_prompt(t_file *s_file);
+void			print_prompt(void);
 void			check_command(t_file *s_file);
 void			free_line(t_file *s_file);
 void			free_struct(t_file *s_file);

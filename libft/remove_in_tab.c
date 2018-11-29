@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 05:32:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 17:33:05 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/29 14:07:17 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,16 @@ char	**remove_in_tab(char **tab, int size, int pos)
 
 	i = 0;
 	i2 = 0;
-	if (!(new = (char**)malloc(sizeof(char*) * (size - 1))))
+	if (!(new = (char**)malloc(sizeof(char*) * (size))))
 		return (NULL);
-	while (i2 < size)
+	while (tab[i2] != NULL)
 	{
 		if (i2 == pos)
 			i2++;
-		if (tab[i2] == NULL)
-			return (new);
 		new[i] = ft_strdup(tab[i2]);
 		i++;
 		i2++;
 	}
+	new[i] = NULL;
 	return (new);
 }

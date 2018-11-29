@@ -6,13 +6,13 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 17:44:15 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:19:22 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_minishell.h"
 
-void	print_prompt(t_file *s_file)
+void	print_prompt(void)
 {
 	char	buf[256];
 	
