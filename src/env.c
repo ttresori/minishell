@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 03:55:04 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/29 14:08:06 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:40:37 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	unset_env(t_file *s_file)
 		search = free_split(search);
 		return ;
 	}
-	ft_putnbr(s_file->size_env);
 	new_env = remove_in_tab(s_file->env, s_file->size_env, pos);
 	free_env(s_file);
 	search = free_split(search);

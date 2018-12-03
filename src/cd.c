@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 05:42:58 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 18:09:22 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:58:05 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	help_modify(t_file *s_file)
 	pos = -1;
 	if (!(s_file->old_pwd = ft_strdup(s_file->pwd)))
 		return ;
-	pos = search_env(s_file->env, s_file->size_env, "PWD=");
+	pos = search_env(s_file->env, s_file->size_env, "PWD");
 	if (pos > -1)
 		free(s_file->env[pos]);
 	else
 	{
-		print_error_no_var_env("PWD");
+		add_env(s_file, "PWD=", s_file->pwd);
 		return ;
 	}
 	free(s_file->pwd);
@@ -44,12 +44,12 @@ void	modify_in_env(t_file *s_file)
 	int		pos;
 	char	*tmp;
 
-	pos = search_env(s_file->env, s_file->size_env, "OLDPWD=");
+	pos = search_env(s_file->env, s_file->size_env, "OLDPWD");
 	if (pos > -1)
 		free(s_file->env[pos]);
 	else
 	{
-		print_error_no_var_env("OLDPWD");
+		add_env(s_file, "OLDPWD=", s_file->old_pwd);
 		return ;
 	}
 	if (!(tmp = ft_strjoin("OLDPWD=", s_file->pwd)))
@@ -126,6 +126,9 @@ void	do_cd(t_file *s_file)
 	}
 	else if (path[0] == '-' && path[1] == '\0')
 	{
+		ft_putstr(RED);
+		ft_putstr(s_file->old_pwd);
+		ft_putendl(NORMAL);
 		free(path);
 		if (!(path = ft_strdup(s_file->old_pwd)))
 			return ;
