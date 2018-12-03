@@ -6,7 +6,7 @@
 /*   By: ttresori <ttresori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 20:33:56 by ttresori          #+#    #+#             */
-/*   Updated: 2018/12/01 14:20:00 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/12/01 14:19:32 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(const void *content, size_t content_size);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
-int					print_tab(char **tab);
+int					 print_tab(char **tab)
 int					get_next_line(int fd, char **line);
 
 #endif

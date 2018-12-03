@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:03:02 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/29 14:18:44 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:36:29 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cpy_env(t_file *s_file, char **env)
 	while (env[i] != NULL)
 		i++;
 	s_file->size_env = i;
-	if (!(s_file->env = (char**)malloc(sizeof(char*) * i)))
+	if (!(s_file->env = (char**)malloc(sizeof(char*) * (i + 1))))
 		return ;
 	i = 0;
 	while (i < s_file->size_env)
@@ -35,6 +35,7 @@ void	cpy_env(t_file *s_file, char **env)
 			return ;
 		i++;
 	}
+	s_file->env[i] = NULL;
 	get_path(s_file);
 }
 
@@ -86,7 +87,7 @@ void	check_if_dollar(t_file *s_file)
 t_file	*split_line(t_file *s_file, char *line)
 {
 	s_file->size_comm = 0;
-	s_file->comm = ft_strsplit(line, ' ');
+	s_file->comm = ft_strsplit_set(line, " \t\r\f");
 	while (s_file->comm[s_file->size_comm] != NULL)
 		s_file->size_comm++;
 	check_if_dollar(s_file);

@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 22:06:45 by ttresori          #+#    #+#             */
-/*   Updated: 2016/11/30 22:09:41 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/11/30 14:22:46 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			ft_atoi(const char *nptr)
 	int	sign;
 	int	res;
 	int	i;
-
+	
 	sign = 1;
 	res = 0;
 	i = 0;
