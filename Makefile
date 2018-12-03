@@ -6,7 +6,7 @@
 #    By: ttresori <ttresori@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/22 21:43:02 by carmand           #+#    #+#              #
-#    Updated: 2018/11/28 18:25:37 by ttresori         ###   ########.fr        #
+#    Updated: 2018/12/03 17:04:59 by ttresori         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJ = $(SRC:.c=.o)
 LIBDIR = libft
 LIB = ft
 
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra
 
 all: $(LIBDIR)/lib$(LIB).a $(OBJDIR) $(NAME)
 
