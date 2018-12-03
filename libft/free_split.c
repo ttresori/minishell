@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 13:22:53 by ttresori          #+#    #+#             */
-/*   Updated: 2018/12/01 13:23:30 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:59:50 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	**free_split(char **split)
 {
-    int	i;
+	int	i;
 
 	i = 0;
 	while (split[i] != NULL)

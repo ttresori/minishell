@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 14:18:05 by ttresori          #+#    #+#             */
-/*   Updated: 2018/12/01 14:23:28 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:59:17 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		print_tab(char **tab)
 {
 	int i;
 
-	i  = 0;
+	i = 0;
 	while (tab[i] != NULL)
 	{
 		ft_putendl(tab[i]);
