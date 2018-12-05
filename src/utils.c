@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 23:18:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/29 14:22:25 by ttresori         ###   ########.fr       */
+/*   Updated: 2018/12/05 18:33:01 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ int		check_builtin(t_file *s_file)
 {
 	if (access(s_file->comm[0], F_OK) == 0)
 	{
-		exec_comm(s_file, s_file->comm[0]);
+		if (access(s_file->comm[0], X_OK) == 0)
+			exec_comm(s_file, s_file->comm[0]);
+		else
+			ft_putendl_fd("Permission Denied", 2);
 		return (1);
 	}
 	if (check_own_builtin(s_file) == 1)
