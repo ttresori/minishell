@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 03:19:19 by ttresori          #+#    #+#             */
-/*   Updated: 2019/01/21 03:19:19 by ttresori         ###   ########.fr       */
+/*   Updated: 2019/01/21 03:26:53 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int		help_check_dollar(t_file *s_file, int *i)
 	if (pos == -1)
 	{
 		free_split(tmp);
-		if (!(s_file->comm = remove_in_tab(s_file->comm, s_file->size_comm, *i)))
+		if (!(s_file->comm = remove_in_tab(s_file->comm,
+	s_file->size_comm, *i)))
 			return (0);
 		s_file->size_comm--;
 		*i = *i - 1;
@@ -65,8 +66,7 @@ int		help_check_dollar(t_file *s_file, int *i)
 	free(s_file->comm[*i]);
 	if (!(s_file->comm[*i] = ft_strdup(tmp2[1])))
 		return (0);
-	free_split(tmp);
-	free_split(tmp2);
+	free_tmp(&tmp, &tmp2);
 	return (1);
 }
 

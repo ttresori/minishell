@@ -6,7 +6,7 @@
 /*   By: ttresori <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 03:18:57 by ttresori          #+#    #+#             */
-/*   Updated: 2019/01/21 03:19:00 by ttresori         ###   ########.fr       */
+/*   Updated: 2019/01/21 03:25:10 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void			print_prompt(void);
 void			check_command(t_file *s_file);
 void			free_line(t_file *s_file);
 void			free_struct(t_file *s_file);
+void			free_tmp(char ***tmp1, char ***tmp2);
 int				cpy_env(t_file *s_file, char **env);
 void			put_env(char **env, int size);
 void			put_path(t_file *s_file);

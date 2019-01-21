@@ -6,7 +6,7 @@
 /*   By: ttresori <rammsteinluffy@gmail.co...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 01:15:52 by ttresori          #+#    #+#             */
-/*   Updated: 2018/11/28 17:53:01 by ttresori         ###   ########.fr       */
+/*   Updated: 2019/01/21 03:24:50 by ttresori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ void	free_line(t_file *s_file)
 		i++;
 	}
 	free(s_file->comm);
+}
+
+void	free_tmp(char ***tmp1, char ***tmp2)
+{
+	free_split(*tmp1);
+	free_split(*tmp2);
 }
 
 void	free_struct(t_file *s_file)
